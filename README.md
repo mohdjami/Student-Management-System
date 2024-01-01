@@ -159,4 +159,4 @@ Student Interface
 
 API Documentation
 
-For detailed information on how to use each API endpoint, refer to the API Documentation.
+For detailed information on how to use each API endpoint, refer to the https://documenter.getpostman.com/view/26354863/2s9YsDkvB5
