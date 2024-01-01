@@ -35,7 +35,7 @@ export default function StudentCard() {
   useEffect(() => {
     const fetchTasks = async () => {
       const response = await fetch(
-        `http://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students`,
+        `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students`,
         {
           method: "GET",
           headers: {
@@ -64,7 +64,7 @@ export default function StudentCard() {
                   <Button
                     onClick={async () => {
                       const response = await fetch(
-                        `http://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students/${student.id}/task`
+                        `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students/${student.id}/task`
                       );
                       const data = await response.json();
                       setTasks(data.tasks);

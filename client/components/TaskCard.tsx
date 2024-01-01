@@ -63,7 +63,7 @@ export const TaskCard: React.FC<TaskProps> = ({
             className="text-xs px-2 py-1"
             onClick={async () => {
               const response = await fetch(
-                `http://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/tasks/${id}`,
+                `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/tasks/${id}`,
                 {
                   method: "GET",
                   headers: {

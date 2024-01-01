@@ -30,7 +30,7 @@ export default function AssignTasks() {
       alert("Please enter a valid email address");
     }
     const response = await fetch(
-      `http://${process.env.NEXT_PUBLIC_NEXT_APP_URL}}/api/students/tasks`,
+      `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}}/api/students/tasks`,
       {
         method: "POST",
         headers: {

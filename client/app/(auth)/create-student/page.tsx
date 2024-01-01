@@ -24,7 +24,7 @@ const CreateStudent = () => {
 
     try {
       const response = await fetch(
-        `http://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/users/signup`,
+        `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/users/signup`,
         {
           method: "POST",
           headers: {

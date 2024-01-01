@@ -19,7 +19,7 @@ const Page = () => {
     event.preventDefault();
     console.log(process.env.NEXT_PUBLIC_NEXT_APP_URL);
     const response = await fetch(
-      `http://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/users/login`,
+      `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/users/login`,
       {
         method: "POST",
         headers: {
