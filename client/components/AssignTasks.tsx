@@ -7,7 +7,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useContext, useState } from "react";
 import TokenContext from "@/lib/TokenContext";
 import { toast } from "./ui/use-toast";
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 export default function AssignTasks() {
   const token = useContext(TokenContext);
 
@@ -28,7 +34,7 @@ export default function AssignTasks() {
       alert("Please enter a valid email address");
     }
     const response = await fetch(
-      `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}}/api/students/tasks`,
+      `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students/tasks`,
       {
         method: "POST",
         headers: {
@@ -98,7 +104,7 @@ export default function AssignTasks() {
                   onChange={(e) => setDescription(e.target.value)}
                 />{" "}
               </div>{" "}
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label htmlFor="status">Task Status</Label>
                 <Input
                   id="status"
@@ -107,6 +113,23 @@ export default function AssignTasks() {
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
                 />{" "}
+              </div> */}
+              <div>
+                <Select
+                  onValueChange={(value) => {
+                    setStatus(value);
+                  }}
+                  defaultValue={status}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Task Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="COMPLETED">COMPLETED</SelectItem>
+                    <SelectItem value="PENDING">PENDING</SelectItem>
+                    <SelectItem value="OVERDUE">OVERDUE</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="due-date">Due Date</Label>
