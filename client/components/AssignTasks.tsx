@@ -1,0 +1,138 @@
+"use client";
+import { CardHeader, CardContent, Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import TokenContext from "@/lib/TokenContext";
+import { toast } from "./ui/use-toast";
+
+export default function AssignTasks() {
+  const router = useRouter();
+  const token = useContext(TokenContext);
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [studentEmail, setStudentEmail] = useState("");
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (!token) {
+      console.error("No token available");
+      return;
+    }
+    if (!studentEmail) {
+      alert("Please enter a valid email address");
+    }
+    const response = await fetch(
+      `http://${process.env.NEXT_PUBLIC_NEXT_APP_URL}}/api/students/tasks`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          status: status,
+          dueDate: dueDate,
+          email: studentEmail,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      toast({
+        title: "Error",
+        description:
+          "An error occurred while submitting the task. Please try again later.",
+      });
+      console.error("Failed to create task");
+    } else {
+      const data = await response.json();
+      toast({
+        title: "Task Created",
+        variant: "default",
+      });
+      // Clear the fields
+      setTitle("");
+      setDescription("");
+      setStatus("");
+      setDueDate("");
+      setStudentEmail("");
+    }
+  };
+
+  return (
+    <main className="flex flex-col lg:flex-row gap-10 p-6">
+      <div className="flex flex-col gap-6 w-full">
+        <Card className="w-full max-w-md mx-auto">
+          <CardHeader>
+            <h2 className="text-2xl font-bold">Assign Task</h2>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="task-description">Task Title</Label>
+              <Input
+                id="title"
+                required
+                type="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />{" "}
+            </div>{" "}
+            <div className="space-y-2">
+              <Label htmlFor="task-description">Task Description</Label>
+              <Input
+                id="description"
+                required
+                type="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />{" "}
+            </div>{" "}
+            <div className="space-y-2">
+              <Label htmlFor="status">Task Status</Label>
+              <Input
+                id="status"
+                required
+                type="status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              />{" "}
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="due-date">Due Date</Label>
+              <Input
+                id="due-date"
+                required
+                value={dueDate}
+                placeholder="YYYY-MM-DD"
+                onChange={(e) => setDueDate(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Student Email</Label>
+              <Input
+                id="email"
+                required
+                type="email"
+                value={studentEmail}
+                onChange={(e) => setStudentEmail(e.target.value)}
+              />
+            </div>
+            <Button className="w-full" onClick={handleSubmit}>
+              Assign Task
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </main>
+  );
+}

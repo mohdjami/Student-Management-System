@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["mongodb"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  email                String   @unique
+  name                 String
+  password             String
+  department            String
+  role                 Role     @default(STUDENT)
+  passwordResetToken   String?  // Nullable because not all users will have a reset token
+  passwordResetExpires DateTime?
+  active               Boolean  @default(true)
+  tasks   Task[]
+
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+model Task {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  dueDate     DateTime
+  status      TaskStatus
+  studentId   String
+  student     User     @relation(fields: [studentId], references: [id])
+
+}
+
+enum TaskStatus {
+  PENDING
+  OVERDUE
+  COMPLETED
+}
