@@ -4,13 +4,11 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import TokenContext from "@/lib/TokenContext";
 import { toast } from "./ui/use-toast";
 
 export default function AssignTasks() {
-  const router = useRouter();
   const token = useContext(TokenContext);
 
   const [title, setTitle] = useState("");
@@ -70,66 +68,70 @@ export default function AssignTasks() {
   };
 
   return (
-    <main className="flex flex-col lg:flex-row gap-10 p-6">
+    <main className="flex flex-col lg:flex-row gap-10 p-6 cols-3 items-start">
       <div className="flex flex-col gap-6 w-full">
         <Card className="w-full max-w-md mx-auto">
           <CardHeader>
             <h2 className="text-2xl font-bold">Assign Task</h2>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="task-description">Task Title</Label>
-              <Input
-                id="title"
-                required
-                type="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />{" "}
-            </div>{" "}
-            <div className="space-y-2">
-              <Label htmlFor="task-description">Task Description</Label>
-              <Input
-                id="description"
-                required
-                type="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />{" "}
-            </div>{" "}
-            <div className="space-y-2">
-              <Label htmlFor="status">Task Status</Label>
-              <Input
-                id="status"
-                required
-                type="status"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              />{" "}
+          <CardContent className="space-y-4 grid grid-cols-1 gap-4">
+            {" "}
+            <div>
+              <div className="space-y-2 w-full">
+                {" "}
+                <Label htmlFor="task-title">Task Title</Label>
+                <Input
+                  id="title"
+                  required
+                  type="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />{" "}
+              </div>{" "}
+              <div className="space-y-2">
+                <Label htmlFor="task-description">Task Description</Label>
+                <Input
+                  id="description"
+                  required
+                  type="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />{" "}
+              </div>{" "}
+              <div className="space-y-2">
+                <Label htmlFor="status">Task Status</Label>
+                <Input
+                  id="status"
+                  required
+                  type="status"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                />{" "}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="due-date">Due Date</Label>
+                <Input
+                  id="due-date"
+                  required
+                  value={dueDate}
+                  placeholder="YYYY-MM-DD"
+                  onChange={(e) => setDueDate(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2 mb-4">
+                <Label htmlFor="email">Student Email</Label>
+                <Input
+                  id="email"
+                  required
+                  type="email"
+                  value={studentEmail}
+                  onChange={(e) => setStudentEmail(e.target.value)}
+                />
+              </div>{" "}
+              <Button className="w-full" onClick={handleSubmit}>
+                Assign Task
+              </Button>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="due-date">Due Date</Label>
-              <Input
-                id="due-date"
-                required
-                value={dueDate}
-                placeholder="YYYY-MM-DD"
-                onChange={(e) => setDueDate(e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Student Email</Label>
-              <Input
-                id="email"
-                required
-                type="email"
-                value={studentEmail}
-                onChange={(e) => setStudentEmail(e.target.value)}
-              />
-            </div>
-            <Button className="w-full" onClick={handleSubmit}>
-              Assign Task
-            </Button>
           </CardContent>
         </Card>
       </div>
