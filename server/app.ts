@@ -25,6 +25,11 @@ app.use(express.static(`${__dirname}/public`));
 //mounting the routers
 app.use("/api/users", authRouter);
 app.use("/api", taskRouter);
+app.use("/", (req, res) => {
+  res.status(200).json({
+    message: "Api working successfully",
+  });
+});
 
 //handling error middleware
 app.use(globalErrorHandler);
