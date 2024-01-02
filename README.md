@@ -160,3 +160,5 @@ Student Interface
 API Documentation
 
 For detailed information on how to use each API endpoint, refer to the https://documenter.getpostman.com/view/26354863/2s9YsDkvB5
+
+I have deployed the application on Render so Api will take some to start Please wait once it is active you will face no issues.
