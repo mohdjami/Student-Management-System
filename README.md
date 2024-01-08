@@ -11,18 +11,18 @@ Technologies Used
 
 Installation
 
-    Clone the repository:
+Clone the repository:
 
-    bash
+bash
 
-git clone https://github.com/your-username/student-management-system.git
+    git clone https://github.com/your-username/student-management-system.git
 
 Install dependencies:
 
 bash
 
-cd student-management-system
-npm install
+    cd student-management-system
+    npm install
 
 Set up the database and environment variables.
 
