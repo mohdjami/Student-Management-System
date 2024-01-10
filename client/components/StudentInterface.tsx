@@ -43,19 +43,14 @@ export const StudentInterface = () => {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {see ? (
           tasks.map((task) => (
-            <Container>
-              <div>
-                {" "}
-                <TaskCard
-                  key={task.id}
-                  title={task.title}
-                  description={task.description}
-                  dueDate={task.dueDate}
-                  status={task.status}
-                  id={task.id}
-                />
-              </div>
-            </Container>
+            <TaskCard
+              key={task.id} // AddED this line
+              title={task.title}
+              description={task.description}
+              dueDate={task.dueDate}
+              status={task.status}
+              id={task.id}
+            />
           ))
         ) : (
           <div>
