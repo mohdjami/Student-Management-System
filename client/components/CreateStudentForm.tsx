@@ -64,60 +64,62 @@ const CreateStudent = () => {
     }
   };
   return (
-    <main className="flex flex-col lg:flex-row gap-10 p-6 items-center justify-center h-screen">
-      <aside className="flex flex-col gap-6">
-        <Card>
-          <CardHeader>
-            <h2 className="text-2xl font-bold">Create Student</h2>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {" "}
-            <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                required
-                type="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>{" "}
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                required
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Department</Label>
-              <Input
-                id="department"
-                required
-                type="department"
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                required
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <Button className="w-full" onClick={handleSubmit}>
-              Create
-            </Button>
-          </CardContent>
-        </Card>{" "}
-      </aside>
+    <main className="flex flex-col lg:flex-row gap-10 p-6 cols-3 items-start">
+      <div className="flex flex-col gap-6 w-full">
+        <aside className="flex flex-col gap-6">
+          <Card className="w-full max-w-md mx-auto">
+            <CardHeader>
+              <h2 className="text-2xl font-bold">Create Student</h2>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {" "}
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  required
+                  type="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>{" "}
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  required
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Department</Label>
+                <Input
+                  id="department"
+                  required
+                  type="department"
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  required
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <Button className="w-full" onClick={handleSubmit}>
+                Create
+              </Button>
+            </CardContent>
+          </Card>{" "}
+        </aside>
+      </div>
     </main>
   );
 };

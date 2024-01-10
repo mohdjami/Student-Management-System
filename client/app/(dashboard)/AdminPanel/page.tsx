@@ -4,8 +4,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import CreateStudent from "@/app/(auth)/create-student/page";
-import AssignTasks from "@/components/AssignTasks";
+import CreateStudent from "@/components/CreateStudentForm";
+import AssignTasksForm from "@/components/AssignTasksForm";
 import { useContext, useState } from "react";
 import TokenContext from "@/lib/TokenContext";
 import { parseJwt } from "@/lib/parsejwt";
@@ -15,7 +15,6 @@ export default function AdminPanel() {
   const [activeComponent, setActiveComponent] = useState("");
   const rawToken = useContext(TokenContext);
   const token = rawToken ? parseJwt(rawToken) : null;
-
   if (token && token.role !== "ADMIN") {
     return (
       <main className="flex flex-col lg:flex-row gap-10 p-6 mt-20 items-center justify-center">
@@ -41,7 +40,7 @@ export default function AdminPanel() {
         <CreateStudent />
       </div>
       <div className={activeComponent === "AssignTask" ? "" : "hidden"}>
-        <AssignTasks />
+        <AssignTasksForm />
       </div>
       <div className={activeComponent === "Students" ? "" : "hidden"}>
         <StudentCard />

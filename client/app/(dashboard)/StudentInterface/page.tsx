@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import CreateStudent from "@/app/(auth)/create-student/page";
-import AssignTasks from "@/components/AssignTasks";
+import AssignTasks from "@/components/AssignTasksForm";
 import { useState } from "react";
 import { StudentInterface } from "@/components/StudentInterface";
 

@@ -14,7 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-export default function AssignTasks() {
+
+export default function AssignTasksForm() {
   const token = useContext(TokenContext);
 
   const [title, setTitle] = useState("");
@@ -104,16 +105,6 @@ export default function AssignTasks() {
                   onChange={(e) => setDescription(e.target.value)}
                 />{" "}
               </div>{" "}
-              {/* <div className="space-y-2">
-                <Label htmlFor="status">Task Status</Label>
-                <Input
-                  id="status"
-                  required
-                  type="status"
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                />{" "}
-              </div> */}
               <div>
                 <Select
                   onValueChange={(value) => {

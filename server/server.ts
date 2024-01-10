@@ -1,7 +1,5 @@
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 import app from "./app";
-import bcrypt from "bcrypt";
 
 process.on("uncaughtException", (err: Error) => {
   console.log(err.name, err.message);
