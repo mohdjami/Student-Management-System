@@ -1,8 +1,8 @@
 // fetchStudentById.ts
 
-import { parseJwt } from "./parsejwt";
+import { parseJwt } from "../lib/parsejwt";
 
-export async function fetchTaskByStudnetId(rawToken: string) {
+export async function fetchTaskByStudentId(rawToken: string) {
   if (rawToken) {
     const token = parseJwt(rawToken);
     const id = token.id;

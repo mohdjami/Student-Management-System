@@ -5,12 +5,12 @@ import { HandMetal, Home } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import TokenContext from "@/lib/TokenContext";
-import { useAuth } from "@/lib/AuthContext";
 import { handleStorageChange } from "@/lib/Storage";
+import { AuthContext } from "@/lib/AuthContext";
 
 const Navbar = () => {
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     handleStorageChange(setIsLoggedIn);

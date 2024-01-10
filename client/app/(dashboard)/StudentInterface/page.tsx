@@ -4,8 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import CreateStudent from "@/app/(auth)/create-student/page";
-import AssignTasks from "@/components/AssignTasksForm";
+import CreateStudent from "@/components/CreateStudentForm";
 import { useState } from "react";
 import { StudentInterface } from "@/components/StudentInterface";
 

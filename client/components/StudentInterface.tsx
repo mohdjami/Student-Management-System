@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-
-import { parseJwt } from "@/lib/parsejwt";
 import TokenContext from "@/lib/TokenContext";
 import { TaskCard } from "./TaskCard";
-import { fetchTaskByStudnetId } from "@/lib/fetchTaskByStudnetId";
+import { fetchTaskByStudentId } from "@/api/fetchTasksByStudentId";
+import SkeletonLoader from "./SkeletonLoader";
+import { Button } from "./ui/button";
+import Container from "./ui/container";
 interface Task {
   status: string;
   title: string;
@@ -15,33 +16,53 @@ interface Task {
 
 export const StudentInterface = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, isLoading] = useState(true);
+  const [see, onSee] = useState(false);
+
   const rawToken = useContext(TokenContext);
 
   useEffect(() => {
     const fetchTasks = async () => {
       if (rawToken) {
-        const tasks = await fetchTaskByStudnetId(rawToken);
+        isLoading(true);
+        const tasks = await fetchTaskByStudentId(rawToken);
         if (tasks) {
           setTasks(tasks);
+          isLoading(false);
         }
       }
     };
 
     fetchTasks();
   }, [rawToken]);
+  if (loading) {
+    return <SkeletonLoader />;
+  }
   return (
     <main className="p-4">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {tasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            title={task.title}
-            description={task.description}
-            dueDate={task.dueDate}
-            status={task.status}
-            id={task.id}
-          />
-        ))}
+        {see ? (
+          tasks.map((task) => (
+            <Container>
+              <div>
+                {" "}
+                <TaskCard
+                  key={task.id}
+                  title={task.title}
+                  description={task.description}
+                  dueDate={task.dueDate}
+                  status={task.status}
+                  id={task.id}
+                />
+              </div>
+            </Container>
+          ))
+        ) : (
+          <div>
+            {" "}
+            <Button onClick={() => onSee(true)}>See My Assigned Tasks</Button>
+          </div>
+        )}
       </div>
     </main>
   );

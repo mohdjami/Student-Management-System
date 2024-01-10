@@ -3,15 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "@/lib/AuthContext";
+import { AuthContext } from "@/lib/AuthContext";
 import { handleStorageChange } from "@/lib/Storage";
 import { parseJwt } from "@/lib/parsejwt";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 const Page = () => {
   const router = useRouter();
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

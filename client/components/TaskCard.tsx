@@ -19,6 +19,7 @@ import { Button } from "./ui/button";
 import { useContext } from "react";
 import TokenContext from "@/lib/TokenContext";
 import router from "next/router";
+import { updateTaskStatus } from "@/api/updateTaskStatus";
 
 interface TaskProps {
   title: string;
@@ -35,7 +36,9 @@ export const TaskCard: React.FC<TaskProps> = ({
   id,
 }) => {
   const token = useContext(TokenContext);
-
+  if (!title) {
+    return <div>No tasks assigned to this student</div>;
+  }
   return (
     <div>
       <Card>
@@ -62,17 +65,7 @@ export const TaskCard: React.FC<TaskProps> = ({
           <Button
             className="text-xs px-2 py-1"
             onClick={async () => {
-              const response = await fetch(
-                `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/tasks/${id}`,
-                {
-                  method: "GET",
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                  },
-                }
-              );
-              if (!response.ok) throw new Error("Network response was not ok");
+              await updateTaskStatus(token, id);
             }}
           >
             Task Done

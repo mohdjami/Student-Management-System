@@ -13,8 +13,9 @@ import { Badge } from "@/components/ui/badge";
 import { useContext, useEffect, useState } from "react";
 import TokenContext from "@/lib/TokenContext";
 import { Button } from "./ui/button";
-import { fetchTaskByStudnetId } from "@/lib/fetchTaskByStudnetId";
+import { fetchTaskByStudentId } from "@/api/fetchTasksByStudentId";
 import { TaskCard } from "./TaskCard";
+import SkeletonLoader from "./SkeletonLoader";
 interface Student {
   id: string;
   email: string;
@@ -32,8 +33,12 @@ export default function StudentCard() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const token = useContext(TokenContext);
   const [students, setStudents] = useState<Student[]>([]);
+  const [loading, isLoading] = useState(true);
+  const [taskloading, isTaskLoading] = useState(true);
+
   useEffect(() => {
-    const fetchTasks = async () => {
+    const fetchStudents = async () => {
+      isLoading(true);
       const response = await fetch(
         `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students`,
         {
@@ -46,9 +51,13 @@ export default function StudentCard() {
       );
       const data = await response.json();
       setStudents(data.data.students);
+      isLoading(false);
     };
-    fetchTasks();
+    fetchStudents();
   }, [token]);
+  if (loading) {
+    return <SkeletonLoader />;
+  }
 
   return (
     <main className="p-8 space-y-4">
@@ -63,10 +72,12 @@ export default function StudentCard() {
                   <p>{student.email}</p>
                   <Button
                     onClick={async () => {
+                      isTaskLoading(false);
                       const response = await fetch(
                         `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students/${student.id}/task`
                       );
                       const data = await response.json();
+                      isTaskLoading(true);
                       setTasks(data.tasks);
                     }}
                   >
@@ -80,16 +91,21 @@ export default function StudentCard() {
       <h2 className="text-xl font-bold">Student Tasks</h2>
       <div>
         {" "}
-        {tasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            title={task.title}
-            description={task.description}
-            dueDate={task.dueDate}
-            status={task.status}
-            id={task.id}
-          />
-        ))}
+        {taskloading ? (
+          tasks.map((task) => (
+            <TaskCard
+              key={task.id}
+              title={task.title}
+              description={task.description}
+              dueDate={task.dueDate}
+              status={task.status}
+              id={task.id}
+              // studentId={students.id}
+            />
+          ))
+        ) : (
+          <SkeletonLoader />
+        )}
       </div>
     </main>
   );
