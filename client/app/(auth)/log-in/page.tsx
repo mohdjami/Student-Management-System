@@ -41,7 +41,7 @@ const Page = () => {
       else router.push("/StudentInterface");
       setIsLoggedIn(true);
       handleStorageChange(setIsLoggedIn);
-      router.refresh();
+      window.location.reload();
     } else {
       router.push("/log-in");
     }

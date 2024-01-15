@@ -24,9 +24,7 @@ export const getAllUsers = catchAsync(
     res.status(200).json({
       status: "success",
       results: students.length,
-      data: {
-        students,
-      },
+      students,
     });
   }
 );
