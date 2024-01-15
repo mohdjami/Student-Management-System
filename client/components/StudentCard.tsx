@@ -96,14 +96,13 @@ export default function StudentCard() {
                         onClick={async () => {
                           isTaskLoading(false);
                           const response = await fetch(
-                            `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students/${student.id}`,
+                            `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/users/${student.id}`,
                             {
                               method: "DELETE",
                             }
                           );
                           const data = await response.json();
                           isTaskLoading(true);
-                          setTasks(data.tasks);
                         }}
                         variant="destructive"
                       >
