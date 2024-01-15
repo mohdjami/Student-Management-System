@@ -15,11 +15,11 @@ export default function AdminPanel() {
   const [activeComponent, setActiveComponent] = useState("");
   const rawToken = useContext(TokenContext);
   const token = rawToken ? parseJwt(rawToken) : null;
-  if (token && token.role !== "ADMIN") {
+  if (token === null || token.role !== "ADMIN") {
     return (
       <main className="flex flex-col lg:flex-row gap-10 p-6 mt-20 items-center justify-center">
         <div className="flex flex-col items-center space-y-4">
-          You are not an admin or reload the page
+          Either you are not an admin or token is not stored
         </div>
       </main>
     );

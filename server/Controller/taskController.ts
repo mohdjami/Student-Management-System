@@ -19,11 +19,43 @@ export const getAllUsers = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     // Fetch all tasks associated with the student
 
-    const students = await db.user.findMany({});
+    const students = await db.user.findMany({ where: { active: true } });
 
     res.status(200).json({
       status: "success",
       results: students.length,
+      students,
+    });
+  }
+);
+
+export const getUserById = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // Fetch all tasks associated with the student
+
+    const students = await db.user.findMany({
+      where: { id: req.params.id, active: true },
+    });
+
+    res.status(200).json({
+      status: "success",
+      results: students.length,
+      students,
+    });
+  }
+);
+
+export const deleteUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // Fetch all tasks associated with the student
+    console.log(req.params.id);
+    const student = await db.user.update({
+      where: { id: req.params.id },
+      data: { active: false },
+    });
+    const students = await db.user.findMany({ where: { active: true } });
+    res.status(200).json({
+      status: "success",
       students,
     });
   }

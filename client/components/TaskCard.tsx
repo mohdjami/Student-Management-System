@@ -36,8 +36,8 @@ export const TaskCard: React.FC<TaskProps> = ({
   id,
 }) => {
   const token = useContext(TokenContext);
-  if (!title) {
-    return <div>No tasks assigned to this student</div>;
+  if (!token) {
+    return <div>Token Expired or null Please Login</div>;
   }
   return (
     <div>

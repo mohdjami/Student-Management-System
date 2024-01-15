@@ -12,6 +12,18 @@ router
     authController.restrictTo("ADMIN"),
     taskController.getAllUsers
   );
+router
+  .route("/:id")
+  .get(
+    authController.protect,
+    authController.restrictTo("ADMIN"),
+    taskController.getUserById
+  )
+  .delete(
+    authController.protect,
+    authController.restrictTo("ADMIN"),
+    taskController.deleteUser
+  );
 
 router.post(
   "/signup",

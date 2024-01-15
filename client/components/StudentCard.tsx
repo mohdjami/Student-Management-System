@@ -50,7 +50,8 @@ export default function StudentCard() {
         }
       );
       const data = await response.json();
-      setStudents(data.data.students);
+      console.log(data);
+      setStudents(data.students);
       isLoading(false);
     };
     fetchStudents();
@@ -63,30 +64,59 @@ export default function StudentCard() {
     <main className="p-8 space-y-4">
       <h1 className="text-2xl font-bold">Student List</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {students.map(
-          (student, index) =>
-            student.role === "STUDENT" && (
-              <Card key={index}>
-                <CardHeader className="flex items-center space-x-2">
-                  <CardTitle>{student.name}</CardTitle>
-                  <p>{student.email}</p>
-                  <Button
-                    onClick={async () => {
-                      isTaskLoading(false);
-                      const response = await fetch(
-                        `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students/${student.id}/task`
-                      );
-                      const data = await response.json();
-                      isTaskLoading(true);
-                      setTasks(data.tasks);
-                    }}
-                  >
-                    View Tasks Assigned
-                  </Button>{" "}
-                </CardHeader>
-              </Card>
-            )
-        )}{" "}
+        {students ? (
+          students.map(
+            (student, index) =>
+              student.role === "STUDENT" && (
+                <Card key={index}>
+                  <CardHeader className="flex items-center space-x-2">
+                    <CardTitle>{student.name}</CardTitle>
+                    <p>{student.email}</p>
+                  </CardHeader>
+                  <CardDescription>
+                    {" "}
+                    <div className="grid grid-cols-2 justify-between text-sm">
+                      {" "}
+                      <Button
+                        onClick={async () => {
+                          isTaskLoading(false);
+                          const response = await fetch(
+                            `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students/${student.id}/task`
+                          );
+                          const data = await response.json();
+                          isTaskLoading(true);
+                          setTasks(data.tasks);
+                        }}
+                        variant="secondary"
+                      >
+                        View Tasks
+                      </Button>
+                      {"       "}
+                      <Button
+                        onClick={async () => {
+                          isTaskLoading(false);
+                          const response = await fetch(
+                            `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/students/${student.id}`,
+                            {
+                              method: "DELETE",
+                            }
+                          );
+                          const data = await response.json();
+                          isTaskLoading(true);
+                          setTasks(data.tasks);
+                        }}
+                        variant="destructive"
+                      >
+                        Delete
+                      </Button>{" "}
+                    </div>
+                  </CardDescription>
+                </Card>
+              )
+          )
+        ) : (
+          <></>
+        )}
       </div>
       <h2 className="text-xl font-bold">Student Tasks</h2>
       <div>
