@@ -108,6 +108,7 @@ export default function StudentCard() {
                           );
                           const data = await response.json();
                           isTaskLoading(true);
+                          window.location.reload();
                         }}
                         variant="destructive"
                       >
