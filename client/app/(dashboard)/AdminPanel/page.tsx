@@ -19,7 +19,7 @@ export default function AdminPanel() {
     return (
       <main className="flex flex-col lg:flex-row gap-10 p-6 mt-20 items-center justify-center">
         <div className="flex flex-col items-center space-y-4">
-          Either you are not an admin or token is not stored
+          Either you are not an admin or reload the page
         </div>
       </main>
     );

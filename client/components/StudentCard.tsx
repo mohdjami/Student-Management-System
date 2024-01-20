@@ -99,6 +99,11 @@ export default function StudentCard() {
                             `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/users/${student.id}`,
                             {
                               method: "DELETE",
+
+                              headers: {
+                                Authorization: `Bearer ${token}`,
+                                "Content-Type": "application/json",
+                              },
                             }
                           );
                           const data = await response.json();
