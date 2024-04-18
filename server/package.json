@@ -4,11 +4,12 @@
   "description": "Student Management system",
   "main": "server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=production nodemon server.ts",
-    "build": "npm i",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
     "postinstall": "prisma generate",
-    "dev": "ts-node server.ts",
+    "start": "node dist/index",
+    "build": "npx tsc -p .",
+    "dev": "npx tsc-watch --onSuccess \"node dist/index.js\"",
     "debug": "ndb server.ts"
   },
   "author": "",

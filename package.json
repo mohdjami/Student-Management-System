@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4",
+    "tsc-watch": "^6.0.4"
+  }
+}

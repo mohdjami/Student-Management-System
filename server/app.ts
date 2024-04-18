@@ -34,7 +34,7 @@ app.use("/api", taskRouter);
 
 app.get("/api/resume", (req, res) => {
   // Set the path to the resume file
-  const resumePath = path.join(__dirname, "Mohd_Jami_Resume.pdf");
+  const resumePath = path.join(__dirname, "Mohd_Jami_Resume-backend.pdf");
 
   // Set the response header to force download
   res.setHeader("Content-Disposition", "attachment; filename=resume.pdf");
