@@ -17,7 +17,6 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 app.use(cors());
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(`${__dirname}/public`));
@@ -31,6 +30,10 @@ app.use("/api", taskRouter);
 //     message: "Api working successfully",
 //   });
 // });
+
+app.get("/", (req, res) => {
+  res.send("API is running....");
+});
 
 app.get("/api/resume", (req, res) => {
   // Set the path to the resume file
