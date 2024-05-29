@@ -13,7 +13,7 @@ const CreateStudent = () => {
   const { toast } = useToast();
   const router = useRouter();
   const token = useContext(TokenContext);
-
+  const [loading, isLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [department, setDepartment] = useState("");
@@ -21,7 +21,7 @@ const CreateStudent = () => {
   //role will come from the jwt in the cookie
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-
+    isLoading(true);
     try {
       const response = await fetch(
         `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/users/signup`,
@@ -55,6 +55,7 @@ const CreateStudent = () => {
           variant: "destructive",
         });
       }
+      isLoading(false);
     } catch (error) {
       toast({
         title: "User not created",
@@ -62,6 +63,7 @@ const CreateStudent = () => {
       });
       router.push("/create-student");
     }
+    isLoading(false);
   };
   return (
     <main className="flex flex-col lg:flex-row gap-10 p-6 cols-3 items-start">
@@ -114,7 +116,7 @@ const CreateStudent = () => {
                 />
               </div>
               <Button className="w-full" onClick={handleSubmit}>
-                Create
+                {loading ? "Loading" : "Create"}
               </Button>
             </CardContent>
           </Card>{" "}

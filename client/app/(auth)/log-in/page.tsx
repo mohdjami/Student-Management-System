@@ -11,12 +11,13 @@ import React, { useContext, useState } from "react";
 
 const Page = () => {
   const router = useRouter();
+  const [loading, isLoading] = useState(false);
   const { setIsLoggedIn } = useContext(AuthContext);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    isLoading(true);
     console.log(process.env.NEXT_PUBLIC_NEXT_APP_URL);
     const response = await fetch(
       `https://${process.env.NEXT_PUBLIC_NEXT_APP_URL}/api/users/login`,
@@ -41,9 +42,13 @@ const Page = () => {
       else router.push("/StudentInterface");
       setIsLoggedIn(true);
       handleStorageChange(setIsLoggedIn);
+      isLoading(false);
     } else {
+      isLoading(false);
+
       router.push("/log-in");
     }
+    isLoading(false);
   };
   return (
     <main className="flex flex-col lg:flex-row gap-10 p-6 items-center justify-center h-screen">
@@ -74,7 +79,7 @@ const Page = () => {
               />
             </div>
             <Button className="w-full" onClick={handleSubmit}>
-              Log In
+              {loading ? "Loading" : "Log In"}
             </Button>
           </CardContent>
         </Card>{" "}

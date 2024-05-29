@@ -7,9 +7,9 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "postinstall": "prisma generate",
-    "start": "node dist/index",
+    "start": "node dist/server",
     "build": "npx tsc -p .",
-    "dev": "npx tsc-watch --onSuccess \"node dist/index.js\"",
+    "dev": "npx tsc-watch --onSuccess \"node dist/server.js\"",
     "debug": "ndb server.ts"
   },
   "author": "",

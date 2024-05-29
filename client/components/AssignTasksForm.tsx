@@ -23,10 +23,11 @@ export default function AssignTasksForm() {
   const [status, setStatus] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
+  const [loading, isLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
+    isLoading(true);
     if (!token) {
       console.error("No token available");
       return;
@@ -72,6 +73,7 @@ export default function AssignTasksForm() {
       setDueDate("");
       setStudentEmail("");
     }
+    isLoading(false);
   };
 
   return (
@@ -143,7 +145,7 @@ export default function AssignTasksForm() {
                 />
               </div>{" "}
               <Button className="w-full" onClick={handleSubmit}>
-                Assign Task
+                {loading ? "Loading" : "Assign Task"}
               </Button>
             </div>
           </CardContent>
