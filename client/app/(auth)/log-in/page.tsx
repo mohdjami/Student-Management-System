@@ -38,8 +38,8 @@ const Page = () => {
       const token = data.token;
       const decodedToken = parseJwt(token);
       localStorage.setItem("token", token);
-      if (decodedToken.role === "ADMIN") router.push("/AdminPanel");
-      else router.push("/StudentInterface");
+      if (decodedToken.role === "ADMIN") router.push("/Admin");
+      else router.push("/Student");
       setIsLoggedIn(true);
       handleStorageChange(setIsLoggedIn);
       isLoading(false);

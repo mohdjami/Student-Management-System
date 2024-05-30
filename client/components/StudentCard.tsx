@@ -75,7 +75,7 @@ export default function StudentCard() {
                   </CardHeader>
                   <CardDescription>
                     {" "}
-                    <div className="grid grid-cols-2 justify-between text-sm">
+                    <div className="grid grid-cols-2 justify-between text-sm m-4">
                       {" "}
                       <Button
                         onClick={async () => {
@@ -88,10 +88,10 @@ export default function StudentCard() {
                           setTasks(data.tasks);
                         }}
                         variant="secondary"
+                        className=" size-10 px-10"
                       >
                         View Tasks
                       </Button>
-                      {"       "}
                       <Button
                         onClick={async () => {
                           isTaskLoading(false);
@@ -107,10 +107,12 @@ export default function StudentCard() {
                             }
                           );
                           const data = await response.json();
+                          console.log(data);
                           isTaskLoading(true);
                           window.location.reload();
                         }}
                         variant="destructive"
+                        className="size-10 px-10"
                       >
                         Delete
                       </Button>{" "}

@@ -107,7 +107,7 @@ export default function AssignTasksForm() {
                   onChange={(e) => setDescription(e.target.value)}
                 />{" "}
               </div>{" "}
-              <div>
+              <div className="pt-4">
                 <Select
                   onValueChange={(value) => {
                     setStatus(value);

@@ -37,6 +37,8 @@ const Navbar = () => {
         <Link href="/">
           <Home />
         </Link>
+        <Link href="/Admin">Admin/Teacher Panel</Link>
+        <Link href="/Student">Student Panel </Link>
         {isLoggedIn ? (
           <Button onClick={logout}>Logout</Button>
         ) : (

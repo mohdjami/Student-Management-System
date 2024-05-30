@@ -48,7 +48,7 @@ const CreateStudent = () => {
           title: "User Successfully created",
           variant: "default",
         });
-        router.push("/AdminPanel");
+        router.push("/Admin");
       } else if (response.status === 403) {
         toast({
           title: "You are not authorized for this action.",

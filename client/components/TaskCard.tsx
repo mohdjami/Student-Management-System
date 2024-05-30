@@ -39,6 +39,24 @@ export const TaskCard: React.FC<TaskProps> = ({
   if (!token) {
     return <div>Token Expired or null Please Login</div>;
   }
+
+  let date = new Date(dueDate);
+
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1; // getMonth() returns a 0-based month, so we add 1
+  let day = date.getDate();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+
+  // Ensure all parts are two-digits by padding with a leading zero if necessary
+  month = month < 10 ? 0 + month : month;
+  day = day < 10 ? 0 + day : day;
+  hours = hours < 10 ? 0 + hours : hours;
+  minutes = minutes < 10 ? 0 + minutes : minutes;
+
+  let readableDateTime = `${day}-${month}-${year} ${hours}:${minutes}`;
+
+  console.log(readableDateTime); // Output: "14-03-2022 10:30"
   return (
     <div>
       <Card>
@@ -58,13 +76,14 @@ export const TaskCard: React.FC<TaskProps> = ({
 
           <div>
             {" "}
-            <Badge className="font-medium">Due: {dueDate}</Badge>
+            <Badge className="font-medium">Due: {readableDateTime}</Badge>
           </div>
         </CardContent>
-        <div className="flex justify-end items-center space-x-4">
+        <div className="flex justify-end items-center space-x-4 p-5">
           <Button
             className="text-xs px-2 py-1"
             onClick={async () => {
+              console.log("clicked");
               await updateTaskStatus(token, id);
             }}
           >
